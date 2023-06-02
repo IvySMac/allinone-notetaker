@@ -17,12 +17,14 @@ app.use(express.static('public'));
 app.get('/', (req, res) => res.send('Navigate to /send or /routes'));
 
 app.get('/notes', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public/notes.html'))
+  res.sendFile(path.join(__dirname, 'public', 'notes.html'))
 );
 
 app.get('/api/notes', (req, res) =>
   res.sendFile(path.join(__dirname, 'db/db.json'))
 );
+
+
 
 // listen() method is responsible for listening for incoming connections on the specified port 
 app.listen(PORT, () =>
