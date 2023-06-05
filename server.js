@@ -3,7 +3,7 @@ const express = require('express');
 
 // Import built-in Node.js package 'path' to resolve path of files that are located on the server
 const path = require('path');
-const api = require('./routes/index.js');
+const api = require('./routes/notes.js');
 
 // Initialize an instance of Express.js
 const app = express();
@@ -23,13 +23,14 @@ app.use(express.static('public'));
 // Create Express.js routes for default '/', '/send' and '/routes' endpoints
 app.get('/', (req, res) => res.send('Navigate to /send or /routes'));
 
-app.get('/notes(.html)?', (req, res) =>
+app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, 'public', 'notes.html'))
 );
 
-app.get('/api/notes(.html)?', (req, res) =>
-  res.sendFile(path.join(__dirname, 'db/db.json'))
-);
+
+// app.get('/api/notes', (req, res) =>
+//   res.sendFile(path.join(__dirname, 'db/db.json'))
+// );
 
 
 
