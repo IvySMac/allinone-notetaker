@@ -1,9 +1,8 @@
 // Import Express.js
 const express = require('express');
-
 // Import built-in Node.js package 'path' to resolve path of files that are located on the server
 const path = require('path');
-const api = require('./routes/notes.js');
+const api = require('./routes/index.js');
 
 // Initialize an instance of Express.js
 const app = express();
@@ -14,14 +13,17 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static('public'));
 app.use('/api', api);
 
 // Static middleware pointing to the public folder
-app.use(express.static('public'));
+
 
 // Create Express.js routes for default '/', '/send' and '/routes' endpoints
-app.get('/', (req, res) => res.send('Navigate to /send or /routes'));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'))
+})
 
 app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, 'public', 'notes.html'))
