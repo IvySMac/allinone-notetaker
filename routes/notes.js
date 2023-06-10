@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
 const uuid = require('../helpers/uuid');
 const fs = require('fs');
 const util = require('util');
@@ -11,7 +10,6 @@ const getNotes=()=> {
 
 // GET Route for retrieving all the feedback
 router.get('/', (req, res) =>
-  // readFromFile('db/db.json').then((data) => res.json(JSON.parse(data)))
   getNotes().then(notes => res.json(notes))
 );
 
@@ -43,9 +41,7 @@ router.delete('/:id', (req, res)=> {
     let filteredNotes=oldNotes.filter(note => note.id !==req.params.id)
     writeFile('db/db.json', JSON.stringify(filteredNotes)).then(()=>res.json(`Note successfully added!✨`))
   }).catch(err => res.json(err))
-  // .then(newNotes => {
-  //   writeFile('db/db.json', JSON.stringify(newNotes)).then(()=>res.json(`Note successfully added!✨`))
-  // })
+
 })
 
 
